@@ -115,18 +115,16 @@ extension SourceView {
     @ViewBuilder
     func sheetDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
         if let navigationData = viewModel.sheetNextViewNavigationData {
-            NavigationView {
-                SourceView(with: navigationData)
-            }
+            SourceView(with: navigationData)
+                .wrapToNavigationView()
         }
     }
-
+    
     @ViewBuilder
     func coverDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
         if let navigationData = viewModel.coverNextViewNavigationData {
-            NavigationView {
-                SourceView(with: navigationData)
-            }
+            SourceView(with: navigationData)
+                .wrapToNavigationView()
         }
     }
 }
