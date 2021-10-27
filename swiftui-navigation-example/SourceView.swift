@@ -90,6 +90,8 @@ struct SourceView: View {
     var navigationLinks: some View {
         Group {
             pushNavigationLink
+
+
         }
     }
 
@@ -108,24 +110,19 @@ extension SourceView {
     @ViewBuilder
     var pushDestinationView: some View {
         if let navigationData = viewModel.pushNextViewNavigationData {
-            SourceView(with: navigationData)
+            SourceView(with: navigationData) // Do not wrap the view into NavigationView when using push.
         }
     }
 
-    @ViewBuilder
     func sheetDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
-        if let navigationData = viewModel.sheetNextViewNavigationData {
-            SourceView(with: navigationData)
-                .wrapToNavigationView()
-        }
+        SourceView(with: navigationData)
+            .wrapToNavigationView()
     }
-    
+
     @ViewBuilder
     func coverDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
-        if let navigationData = viewModel.coverNextViewNavigationData {
-            SourceView(with: navigationData)
-                .wrapToNavigationView()
-        }
+        SourceView(with: navigationData)
+            .wrapToNavigationView()
     }
 }
 
