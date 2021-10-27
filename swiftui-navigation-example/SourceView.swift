@@ -22,7 +22,6 @@ struct SourceView: View {
     }
 
     var body: some View {
-        // NOTE: - PUSH NAVIGATION STEP 10
         ZStack {
             navigationLinks
             content
@@ -41,6 +40,7 @@ struct SourceView: View {
             fullScreenCoverButton
         }
         .hiddenNavigationBar()
+        // NOTE: - SHEET NAVIGATION STEP 4
         .sheet(
             item: $viewModel.sheetNextViewNavigationData,
             onDismiss: nil,
@@ -70,11 +70,11 @@ struct SourceView: View {
 
     var pushButton: some View {
         Button("Push") {
-            // NOTE: - PUSH NAVIGATION STEP 6
             viewModel.buttonPressWhichTriggersPushNavigation()
         }
     }
 
+    // NOTE: - SHEET NAVIGATION STEP 5
     var sheetButton: some View {
         Button("Sheet") {
             viewModel.buttonPressWhichTriggersSheetNavigation()
@@ -89,14 +89,12 @@ struct SourceView: View {
 
     // MARK: - Navigation Links
 
-    // NOTE: - PUSH NAVIGATION STEP 9
     var navigationLinks: some View {
         Group {
             pushNavigationLink
         }
     }
 
-    // NOTE: - PUSH NAVIGATION STEP 8
     var pushNavigationLink: some View {
         NavigationLink(
             destination: pushDestinationView,
@@ -110,7 +108,6 @@ struct SourceView: View {
 // These destination views define where can we go (navigate) from this view.
 extension SourceView {
 
-    // NOTE: - PUSH NAVIGATION STEP 7
     @ViewBuilder
     var pushDestinationView: some View {
         if let navigationData = viewModel.pushNextViewNavigationData {
@@ -118,6 +115,7 @@ extension SourceView {
         }
     }
 
+    // NOTE: - SHEET NAVIGATION STEP 3
     func sheetDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
         SourceView(with: navigationData)
             .wrapToNavigationView()

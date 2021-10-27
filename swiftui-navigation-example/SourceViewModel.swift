@@ -20,9 +20,9 @@ class SourceViewModel: ObservableObject {
 
     // MARK: - Navigation Related
 
-    @Published var pushNextViewNavigationData: SourceViewNavigationData? // NOTE: - PUSH NAVIGATION STEP 1
-    @Published var pushNavigation: Bool = false // Cannot avoid this // NOTE: - PUSH NAVIGATION STEP 2
-    @Published var sheetNextViewNavigationData: SourceViewNavigationData?
+    @Published var pushNextViewNavigationData: SourceViewNavigationData?
+    @Published var pushNavigation: Bool = false // Cannot avoid this
+    @Published var sheetNextViewNavigationData: SourceViewNavigationData? // NOTE: - SHEET NAVIGATION STEP 1
     @Published var coverNextViewNavigationData: SourceViewNavigationData?
 
     // MARK: - Private (ViewModel Only)
@@ -36,12 +36,10 @@ class SourceViewModel: ObservableObject {
     init(with navigationData: SourceViewNavigationData) {
         self.level = navigationData.level
 
-        // NOTE: - PUSH NAVIGATION STEP 4
         setupObservers()
     }
 
     private func setupObservers() {
-        // NOTE: - PUSH NAVIGATION STEP 3
         $pushNextViewNavigationData
             .map { $0 != nil }
             .assign(to: &$pushNavigation)
@@ -49,11 +47,11 @@ class SourceViewModel: ObservableObject {
 
     // MARK: - Handling User Interactions
 
-    // NOTE: - PUSH NAVIGATION STEP 5
     public func buttonPressWhichTriggersPushNavigation() {
         pushNextViewNavigationData = .init(level: nextLevel)
     }
 
+    // NOTE: - SHEET NAVIGATION STEP 2
     public func buttonPressWhichTriggersSheetNavigation() {
         sheetNextViewNavigationData = .init(level: nextLevel)
     }
