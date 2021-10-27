@@ -49,8 +49,8 @@ class SourceViewModel: ObservableObject {
 
     // MARK: - Handling User Interactions
 
+    // NOTE: - PUSH NAVIGATION STEP 5
     public func buttonPressWhichTriggersPushNavigation() {
-        // NOTE: - PUSH NAVIGATION STEP 5
         pushNextViewNavigationData = .init(level: nextLevel)
     }
 
