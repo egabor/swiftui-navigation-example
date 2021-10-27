@@ -121,7 +121,6 @@ extension SourceView {
             .wrapToNavigationView()
     }
 
-    @ViewBuilder
     func coverDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
         SourceView(with: navigationData)
             .wrapToNavigationView()
