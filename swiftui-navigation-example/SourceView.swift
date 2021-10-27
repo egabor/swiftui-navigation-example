@@ -90,8 +90,6 @@ struct SourceView: View {
     var navigationLinks: some View {
         Group {
             pushNavigationLink
-
-
         }
     }
 
