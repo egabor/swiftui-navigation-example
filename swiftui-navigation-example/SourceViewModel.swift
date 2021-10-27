@@ -21,6 +21,7 @@ class SourceViewModel: ObservableObject {
     // MARK: - Navigation Related
 
     @Published var pushNextViewNavigationData: SourceViewNavigationData?
+    @Published var pushNavigation: Bool = false // Cannot avoid this
     @Published var sheetNextViewNavigationData: SourceViewNavigationData?
     @Published var coverNextViewNavigationData: SourceViewNavigationData?
 
@@ -34,6 +35,14 @@ class SourceViewModel: ObservableObject {
     
     init(with navigationData: SourceViewNavigationData) {
         self.level = navigationData.level
+
+        setupObservers()
+    }
+
+    private func setupObservers() {
+        $pushNextViewNavigationData
+            .map { $0 != nil }
+            .assign(to: &$pushNavigation)
     }
 
     // MARK: - Handling User Interactions

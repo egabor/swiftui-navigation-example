@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SourceView: View {
-    @ObservedObject var viewModel: SourceViewModel
+    @StateObject var viewModel: SourceViewModel
 
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) private var presentationMode
 
     // The View's init defines how can we get into this view.
     init(with navigationData: SourceViewNavigationData) {
@@ -62,7 +62,7 @@ struct SourceView: View {
     var dismissButton: some View {
         if viewModel.shouldShowDismissButton {
             Button("Dismiss") {
-                dismiss()
+                presentationMode.wrappedValue.dismiss()
             }
         }
     }
@@ -96,7 +96,7 @@ struct SourceView: View {
     var pushNavigationLink: some View {
         NavigationLink(
             destination: pushDestinationView,
-            isActive: .constant(viewModel.pushNextViewNavigationData != nil),
+            isActive: $viewModel.pushNavigation,
             label: {}
         )
     }
