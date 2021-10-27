@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct SourceView: View {
+    @ObservedObject var viewModel: SourceViewModel
+
     @Environment(\.dismiss) private var dismiss
 
-    @State var push: Bool = false
-    @State var sheet: Bool = false
-    @State var fullScreenCover: Bool = false
-
-    var level: Int
+    // The View's init defines how can we get into this view.
+    init(with navigationData: SourceViewNavigationData) {
+        _viewModel = .init(
+            wrappedValue: .init(
+                with: navigationData
+            )
+        )
+    }
 
     var body: some View {
         ZStack {
@@ -36,26 +41,26 @@ struct SourceView: View {
         }
         .hiddenNavigationBar()
         .sheet(
-            isPresented: $sheet,
+            item: $viewModel.sheetNextViewNavigationData,
             onDismiss: nil,
-            content: { NavigationView { SourceView(level: level + 1) }}
+            content: sheetDestinationView
         )
         .fullScreenCover(
-            isPresented: $fullScreenCover,
+            item: $viewModel.coverNextViewNavigationData,
             onDismiss: nil,
-            content: { NavigationView { SourceView(level: level + 1) }}
+            content: coverDestinationView
         )
     }
 
     var levelText: some View {
-        Text("Current Level is \(level)")
+        Text("Current Level is \(viewModel.level)")
     }
 
     // MARK: - Buttons
 
     @ViewBuilder
     var dismissButton: some View {
-        if level != 0 {
+        if viewModel.shouldShowDismissButton {
             Button("Dismiss") {
                 dismiss()
             }
@@ -64,37 +69,70 @@ struct SourceView: View {
 
     var pushButton: some View {
         Button("Push") {
-            push = true
+            viewModel.buttonPressWhichTriggersPushNavigation()
         }
     }
 
     var sheetButton: some View {
         Button("Sheet") {
-            sheet = true
+            viewModel.buttonPressWhichTriggersSheetNavigation()
         }
     }
 
     var fullScreenCoverButton: some View {
         Button("Full Screen Cover") {
-            fullScreenCover = true
+            viewModel.buttonPressWhichTriggersFullScreenCoverNavigation()
         }
     }
 
     // MARK: - Navigation Links
 
-    private var navigationLinks: some View {
+    var navigationLinks: some View {
         Group {
-            NavigationLink(
-                destination: SourceView(level: level + 1),
-                isActive: $push,
-                label: {}
-            )
+            pushNavigationLink
+        }
+    }
+
+    var pushNavigationLink: some View {
+        NavigationLink(
+            destination: pushDestinationView,
+            isActive: .constant(viewModel.pushNextViewNavigationData != nil),
+            label: {}
+        )
+    }
+}
+
+// MARK: - Destination Views
+// These destination views define where can we go (navigate) from this view.
+extension SourceView {
+    @ViewBuilder
+    var pushDestinationView: some View {
+        if let navigationData = viewModel.pushNextViewNavigationData {
+            SourceView(with: navigationData)
+        }
+    }
+
+    @ViewBuilder
+    func sheetDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
+        if let navigationData = viewModel.sheetNextViewNavigationData {
+            NavigationView {
+                SourceView(with: navigationData)
+            }
+        }
+    }
+
+    @ViewBuilder
+    func coverDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
+        if let navigationData = viewModel.coverNextViewNavigationData {
+            NavigationView {
+                SourceView(with: navigationData)
+            }
         }
     }
 }
 
 struct SourceView_Previews: PreviewProvider {
     static var previews: some View {
-        SourceView(level: 0)
+        SourceView(with: .init(level: 0))
     }
 }

@@ -13,6 +13,8 @@
 		621CF8EF27247217007794B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 621CF8EE27247217007794B5 /* Preview Assets.xcassets */; };
 		621CF8F627247853007794B5 /* SourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621CF8F527247853007794B5 /* SourceView.swift */; };
 		621CF8F827247A06007794B5 /* View+HiddenNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621CF8F727247A06007794B5 /* View+HiddenNavigationBar.swift */; };
+		629442862729503100E629B4 /* SourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629442852729503100E629B4 /* SourceViewModel.swift */; };
+		62944288272950C100E629B4 /* SourceViewNavigationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62944287272950C100E629B4 /* SourceViewNavigationData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		621CF8EE27247217007794B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		621CF8F527247853007794B5 /* SourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceView.swift; sourceTree = "<group>"; };
 		621CF8F727247A06007794B5 /* View+HiddenNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+HiddenNavigationBar.swift"; sourceTree = "<group>"; };
+		629442852729503100E629B4 /* SourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewModel.swift; sourceTree = "<group>"; };
+		62944287272950C100E629B4 /* SourceViewNavigationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewNavigationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 				621CF8E727247215007794B5 /* swiftui_navigation_exampleApp.swift */,
 				621CF8E927247215007794B5 /* ContentView.swift */,
 				621CF8F527247853007794B5 /* SourceView.swift */,
+				629442852729503100E629B4 /* SourceViewModel.swift */,
+				62944287272950C100E629B4 /* SourceViewNavigationData.swift */,
 				621CF8F727247A06007794B5 /* View+HiddenNavigationBar.swift */,
 				621CF8EB27247217007794B5 /* Assets.xcassets */,
 				621CF8ED27247217007794B5 /* Preview Content */,
@@ -145,6 +151,8 @@
 			files = (
 				621CF8F827247A06007794B5 /* View+HiddenNavigationBar.swift in Sources */,
 				621CF8F627247853007794B5 /* SourceView.swift in Sources */,
+				629442862729503100E629B4 /* SourceViewModel.swift in Sources */,
+				62944288272950C100E629B4 /* SourceViewNavigationData.swift in Sources */,
 				621CF8EA27247215007794B5 /* ContentView.swift in Sources */,
 				621CF8E827247215007794B5 /* swiftui_navigation_exampleApp.swift in Sources */,
 			);

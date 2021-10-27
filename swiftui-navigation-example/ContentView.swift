@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            SourceView(level: 0)
+            SourceView(with: .init(level: 0))
         }
     }
 }
