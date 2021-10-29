@@ -12,7 +12,7 @@ import UIKit.UIApplication
 class AppEntry: ObservableObject {
 
     public enum Screen {
-        case splash, screen1, screen2
+        case splash, screen1
     }
 
     @Published var screen: Screen = .splash

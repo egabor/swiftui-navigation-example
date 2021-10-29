@@ -15,12 +15,7 @@ struct SplashScreen: View {
                     AppEntry.state.screen = .screen1
                 }
             } label: {
-                Text("Splash View")
-            }
-            Button {
-                AppEntry.state.screen = .screen2
-            } label: {
-                Text("Splash View")
+                Text("Show App Content")
             }
         }
     }

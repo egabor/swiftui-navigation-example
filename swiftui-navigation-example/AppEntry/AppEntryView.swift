@@ -23,7 +23,6 @@ struct AppEntryView: View {
         switch state.screen {
         case .splash: splashScreen
         case .screen1: screen1
-        case .screen2: screen2
         }
     }
 }
@@ -38,12 +37,6 @@ extension AppEntryView {
     }
 
     var screen1: some View {
-        SourceScreen(with: .init(level: 0))
-            .wrapToNavigationView()
-            .transition(.opacity.animation(.easeIn))
-    }
-
-    var screen2: some View {
         SourceScreen(with: .init(level: 0))
             .wrapToNavigationView()
             .transition(.opacity.animation(.easeIn))
