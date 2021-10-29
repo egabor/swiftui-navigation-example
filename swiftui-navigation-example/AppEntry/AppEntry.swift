@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import UIKit.UIApplication
 
 class AppEntry: ObservableObject {
 
@@ -20,5 +19,4 @@ class AppEntry: ObservableObject {
     private init() {}
 
     public static let state = AppEntry()
-
 }

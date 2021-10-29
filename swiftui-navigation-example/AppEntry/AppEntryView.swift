@@ -8,7 +8,6 @@
 import SwiftUI
 
 // Pop to root
-// Dismiss modal
 
 struct AppEntryView: View {
     @StateObject private var state: AppEntry = .state
