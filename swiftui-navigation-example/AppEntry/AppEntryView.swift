@@ -18,7 +18,7 @@ struct AppEntryView: View {
 
     @ViewBuilder
     var view: some View {
-        // Dangerous operation. Not recommended to use when you're in a navigation stack. Only use for splash screen and app start.
+        // Dangerous operation. Need some enhancement. Not recommended to use when you're in a navigation stack. Only use for splash screen and app start.
         switch state.screen {
         case .splash: splashScreen
         case .screen1: screen1
