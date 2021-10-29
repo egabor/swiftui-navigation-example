@@ -89,14 +89,14 @@ struct SourceScreen: View {
         }
     }
 
-    var splashScreenButton: some View {
-        Button("Go To Splash") {
-            // This only should be used when there aren't any sheets or fullScreenCovers shown.
-            withAnimation {
-                AppEntry.state.screen = .splash
-            }
-        }
-    }
+//    var splashScreenButton: some View {
+//        Button("Go To Splash") {
+//            // This only should be used when there aren't any sheets or fullScreenCovers shown.
+//            withAnimation {
+//                AppEntry.state.screen = .splash
+//            }
+//        }
+//    }
 
     var dismissCurrentModalButton: some View {
         Button("Dismiss Modal Anywhere From It's Stack") {
