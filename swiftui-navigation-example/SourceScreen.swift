@@ -1,5 +1,5 @@
 //
-//  SourceView.swift
+//  SourceScreen.swift
 //  swiftui-navigation-example
 //
 //  Created by Eszenyi Gábor on 2021. 10. 23..
@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct SourceView: View {
+struct SourceScreen: View {
     @StateObject var viewModel: SourceViewModel
 
     @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.modalRootPresentation) private var dismissModal
 
     // The View's init defines how can we get into this view.
     init(with navigationData: SourceViewNavigationData) {
@@ -31,13 +32,15 @@ struct SourceView: View {
     // MARK: - View Content
 
     var content: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 32) {
             levelText
 
 			dismissButton
             pushButton
             sheetButton
             fullScreenCoverButton
+//            splashScreenButton
+            dismissCurrentModalButton
         }
         .hiddenNavigationBar()
         .sheet(
@@ -45,6 +48,7 @@ struct SourceView: View {
             onDismiss: nil,
             content: sheetDestinationView
         )
+        // Use the fullScreenCover when want to show a flow which will be dismissed at the final step.
         .fullScreenCover(
             item: $viewModel.coverNextViewNavigationData,
             onDismiss: nil,
@@ -85,6 +89,21 @@ struct SourceView: View {
         }
     }
 
+//    var splashScreenButton: some View {
+//        Button("Go To Splash") {
+//            // This only should be used when there aren't any sheets or fullScreenCovers shown.
+//            withAnimation {
+//                AppEntry.state.screen = .splash
+//            }
+//        }
+//    }
+
+    var dismissCurrentModalButton: some View {
+        Button("Dismiss Modal Anywhere From It's Stack") {
+            dismissModal()
+        }
+    }
+
     // MARK: - Navigation Links
 
     var navigationLinks: some View {
@@ -104,27 +123,28 @@ struct SourceView: View {
 
 // MARK: - Destination Views
 // These destination views define where can we go (navigate) from this view.
-extension SourceView {
+extension SourceScreen {
     @ViewBuilder
     var pushDestinationView: some View {
         if let navigationData = viewModel.pushNextViewNavigationData {
-            SourceView(with: navigationData) // Do not wrap the view into NavigationView when using push.
+            SourceScreen(with: navigationData) // Do not wrap the view into NavigationView when using push.
         }
     }
 
+    @ViewBuilder
     func sheetDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
-        SourceView(with: navigationData)
-            .wrapToNavigationView()
+        SourceScreen(with: navigationData)
+            .wrapToNavigationView(level: navigationData.level)
     }
 
     func coverDestinationView(_ navigationData: SourceViewNavigationData) -> some View {
-        SourceView(with: navigationData)
-            .wrapToNavigationView()
+        SourceScreen(with: navigationData)
+            .wrapToNavigationView(level: navigationData.level)
     }
 }
 
 struct SourceView_Previews: PreviewProvider {
     static var previews: some View {
-        SourceView(with: .init(level: 0))
+        SourceScreen(with: .init(level: 0))
     }
 }
