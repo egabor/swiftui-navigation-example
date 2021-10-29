@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            SourceView(with: .init(level: 0))
-        }
+        AppEntryView()
     }
 }
 

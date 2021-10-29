@@ -8,7 +8,21 @@
 import SwiftUI
 
 public extension View {
-    func wrapToNavigationView() -> some View {
-        NavigationView { self }
+    /// The `level` param is for debugging and logging purposes only. No business logic is built for this.
+    func wrapToNavigationView(level: Int? = nil) -> some View {
+        RootNavigationView(level: level) { self }
     }
 }
+
+struct ModalRootPresentationKey: EnvironmentKey {
+    static let defaultValue: ModalRootPresentation = { print("❗️ RootPresentationModeKey.defaultValue") }
+}
+
+extension EnvironmentValues {
+    var modalRootPresentation: ModalRootPresentation {
+        get { return self[ModalRootPresentationKey.self] }
+        set { self[ModalRootPresentationKey.self] = newValue }
+    }
+}
+
+typealias ModalRootPresentation = () -> Void
